@@ -15,7 +15,6 @@ import android.widget.Toast;
 
 public class MainActivity extends AppCompatActivity implements View.OnClickListener {
     //Objetos utilizados para armazenar e recuperar os dados
-
     private SharedPreferences mSharedPreferences;
     private SharedPreferences.Editor mEditor;
     private EditText usuarioEditText;
@@ -37,10 +36,10 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         novoUsuarioTextView = findViewById(R.id.textview_novo);
         logarButton.setOnClickListener(this);
         novoUsuarioTextView.setOnClickListener(this);
-
         //Vamos instanciar as preferencias em modo privado, ou seja, somente acessíveis
         // ao próprio app.
         mSharedPreferences = this.getPreferences(MODE_PRIVATE);
+        //mSharedPreferences = this.getSharedPreferences(getString(R.string.file_preferences), MODE_PRIVATE);
         mEditor = mSharedPreferences.edit();
     }
 
@@ -60,7 +59,6 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
     No onResumo() é um bom momento para verificar se o usuário possui dados armazenados ou não,
     lembre-se que o onCreate() só é executado uma vez.
     */
-
     @Override
     protected void onResume() {
         Log.i(getString(R.string.tag), "Classe: " + getClass().getSimpleName() + "| Método : onResume()");
@@ -71,7 +69,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
 
     @Override
     protected void onPause() {
-        Log.i(getString(R.string.tag), "Classe: " + getClass().getSimpleName() + "| Método :onPause()");
+        Log.i(getString(R.string.tag), "Classe: " + getClass().getSimpleName() + "| Método : onPause()");
         super.onPause();
     }
 
@@ -100,6 +98,11 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
             // os dados de login para outros acessos.
             salvaPreferencias();
             abrirBoasVindas();
+            return;
+        }
+        if (view == novoUsuarioTextView) {
+            Intent in = new Intent(this, NovoUsuarioActivity.class);
+            startActivity(in);
             return;
         }
     }
@@ -133,9 +136,8 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         }
     }
 
-    /*
-    Aqui recuperamos as preferências do usuário, e caso existam (boolean lembrar) atualizamos
-    os dados na tela da activity.
+    /*Aqui recuperamos as preferências do usuário, e caso existam (boolean lembrar)
+    atualizamosos dados na tela da activity.
     */
     private void verificarPreferencias() {
         usuario = mSharedPreferences.getString(getString(R.string.key_usuario), "");
