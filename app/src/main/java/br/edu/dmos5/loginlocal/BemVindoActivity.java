@@ -1,6 +1,8 @@
 package br.edu.dmos5.loginlocal;
+
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
+
 import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
@@ -14,20 +16,53 @@ public class BemVindoActivity extends AppCompatActivity {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
+        Log.i(getString(R.string.tag), "Classe: " + getClass().getSimpleName() + "| Método : onCreate()");
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_bem_vindo);
         mensagemTextView = findViewById(R.id.textview_mensagem);
 
         //Apresenta navigation up
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
-
-        //Recupera os dados enviados pela MainActivity
         Intent intent = getIntent();
         usuario = intent.getStringExtra(getString(R.string.key_usuario));
         senha = intent.getStringExtra(getString(R.string.key_senha));
-
-        //Vamos anaisar se o usuário pode logar ou não
         validarUsuario();
+    }
+
+    @Override
+    protected void onStart() {
+        Log.i(getString(R.string.tag), "Classe: " + getClass().getSimpleName() + "| Método : onStart()");
+        super.onStart();
+    }
+
+    @Override
+    protected void onRestart() {
+        Log.i(getString(R.string.tag), "Classe: " + getClass().getSimpleName() + "| Método : onRestart()");
+        super.onRestart();
+    }
+
+    @Override
+    protected void onResume() {
+        Log.i(getString(R.string.tag), "Classe: " + getClass().getSimpleName() + "| Método : onResume()");
+        super.onResume();
+    }
+
+    @Override
+    protected void onPause() {
+        Log.i(getString(R.string.tag), "Classe: " + getClass().getSimpleName() + "| Método : onPause()");
+        super.onPause();
+    }
+
+    @Override
+    protected void onStop() {
+        Log.i(getString(R.string.tag), "Classe: " + getClass().getSimpleName() + "| Método : onStop()");
+        super.onStop();
+    }
+
+    @Override
+    protected void onDestroy() {
+        Log.i(getString(R.string.tag), "Classe: " + getClass().getSimpleName() + "| Método : onDestroy()");
+        super.onDestroy();
     }
 
     private void validarUsuario() {
